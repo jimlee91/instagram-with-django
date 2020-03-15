@@ -1,0 +1,9 @@
+<div class="d-flex align-items-center mb-2" onclick="location.href='{% url "instagram:user_page" suggested_user.username %}'">
+    <div class="mr-2">
+        <img src="{{ suggested_user.avatar_url }}" style="width: 50px" />
+    </div>
+    <div class="">
+        {{ suggested_user.username }}
+    </div>
+    <a href="{% url "accounts:user_follow" suggested_user.username %}" class=" ml-auto btn btn-primary">Follow</a>
+</div>

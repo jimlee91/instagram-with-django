@@ -1,0 +1,46 @@
+{% extends 'instagram/layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{% url "instagram:post_new" %}" class="btn btn-block btn-primary">새 포스팅 쓰기</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-8">
+                {% for post in post_list %}
+                    {% include "instagram/include/post_card.html" %}
+                {% endfor %}
+            </div>
+            <div class="col-sm-4">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="mr-2">
+                        <img src="{{ user.avatar_url }}" style="width: 50px" />
+                    </div>
+                    <div class="">
+                        {{ user.username }}<br/>
+                        <small class="text-muted">{{ user.name }}</small>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header text-muted">Stories</div>
+                    <div class="card-body text-muted">
+                        Stories from people you follow will show up here.
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header text-muted">Suggestions form you</div>
+                    <div class="card-body text-muted">
+                        {% for suggested_user in suggested_user_list %}
+                            {% include 'instagram/include/timeline_sidebar_user_follow.html' with suggested_user=suggested_user %}
+                        {% empty %}
+                            추천친구가 없습니다.
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
