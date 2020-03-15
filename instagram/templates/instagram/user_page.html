@@ -1,0 +1,36 @@
+{% extends 'instagram/layout.html' %}
+{% load thumbnail %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <img src="{{ page_user.avatar_url }}" class="rounded-circle" style="width: 250px;" />
+             </div>
+            <div class="col-sm-9">
+             {{ page_user.username }}
+            <a href="{% url "accounts:profile_edit" %}" class="btn btn-secondary">Edit Profile</a>
+            <hr/>
+            {{ post_list_count }} posts, 0 followers, 0followings
+            <hr/>
+            {{ page_user.name }}
+            </div>
+        </div>
+        <div class="row mt-5">
+          
+            {% if post_list_count == 0 %}
+                <div class="col-sm-12">
+                    <div class="alert alert-info">
+                        작성하신 포스트가 없습니다.
+                    </div>
+                </div>
+            {% else %}
+                {% for post in post_list.all %}
+                    <a href="{% url "instagram:post_detail" post.pk  %}" class="col-sm-3 p-3">
+                        <img src="{% thumbnail post.photo 256x256 crop %}" alt="{{ post.caption }}" style="width: 100%;%" />
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

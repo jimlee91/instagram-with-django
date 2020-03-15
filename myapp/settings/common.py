@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third Apps
     'debug_toolbar',
+    'bootstrap4',
+    'django_pydenticon',
+    'taggit',
+    'easy_thumbnails',
     # Locals Apps
+    'accounts',
+    'instagram'
 ]
 
 MIDDLEWARE = [
@@ -88,6 +94,14 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+ADMINS = [
+    ('Eonsang Lee', '2eonhworking@gmail.com')
+]
+
+AUTH_USER_MODEL = "accounts.User"
+
+LOGIN_REDIRECT_URL = "/"
 
 
 # Password validation
@@ -138,3 +152,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# SEND GRID
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY", '')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'devKey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+WELCOME_EMAIL_SENDER = "2eonhworking@gmail.com"
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+    },
+}
